@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 
-<body>
+<body class="sfondo-pagina">
     <div class="container">
         <div class="row banner p-2">
 
@@ -51,16 +51,33 @@
                 </div>
             </div>
 
-            <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
-                <button type="button" class="btn btn-custom "><a href="/login">Accedi</a>
+            <% if(req.user) {%>
+                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
+                    <button type="button" class="btn btn-custom "><a href="/login">Accedi</a>
     
                 </button>
-            </div>
-             <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
-                <button type="button" class="btn btn-custom "><a href="/registrati">Registrati</a>
+                </div>
+                <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
+                    <button type="button" class="btn btn-custom "><a href="/registrati">Registrati</a>
     
                 </button>
-            </div>
+                </div>
+                <%}
+            else {
+                %>
+
+                    <div class="<%=classiColonna%>">
+                        <button type="button" class="<%=classiBottone%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pagina Personale
+
+                </button>
+                    </div>
+                    <%}%>
+
+
+
+
+
 
         </div>
         <div class="row">
@@ -90,7 +107,9 @@
 
 
 
-
+    <div class="col text-center">
+        <img src="../immagineFinePagina.jpg" class="img-responsive" alt="logo finale">
+    </div>
 
 
 

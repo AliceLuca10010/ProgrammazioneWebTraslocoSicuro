@@ -68,9 +68,10 @@ color: black;
     position: relative;
 	width:700px;
 	
-    
+    background-image: url("../sfondoTesto.jpg");
     margin: 0 auto;
-	background:#ffc38e;
+    border-radius: 50px 50px 50px 50px;
+    
 }
 .carousel {
   width:80%;
@@ -92,12 +93,24 @@ color: black;
     text-decoration: underline;
 }
 .alto{
-    height: 700px;
+    height: 500px;
     position: relative;
 }
 .centrato{
     margin:auto;
 }
+ul.lista-senza-decorazioni {
+
+
+    list-style: none;}
+
+    .sfondo-pagina{
+    background-color: #ff9a41;  
+    }
+    
+    .table-active{
+        background-color: #FF8060;
+    }
 
 
 
