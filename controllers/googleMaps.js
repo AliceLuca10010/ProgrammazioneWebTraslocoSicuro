@@ -82,8 +82,8 @@ function getTraslocatorePiuVicino(origins, destinations, callback) {
                         if (distanceValue <= min) {
                             //distanceValue diventa il nuovo min
                             min = distanceValue;
-                            //mi salvo il valore di j
-                            nearestDestinationIndex = j;
+                            //mi salvo inl valore di j
+                            nearestDestiationIndex = j;
                         }
                     } else {
                         //se il calcolo della distanza non è stato possibile stampo messaggio di errore
@@ -144,6 +144,7 @@ function getDistance(origins, destinations, callback) {
 
 module.exports = {
     getTraslocatorePiuVicino, //prende come input l'indirizzo di origine e restituisce il traslocatore più vicino
-    getDistance //prende come input l'indirizzo di partenza e quello di arrivo (sotto forma di array)
+    getDistance,
+     //prende come input l'indirizzo di partenza e quello di arrivo (sotto forma di array)
     //e restituisce la distanza tra i due (distanceValue (int), distanceText (string -> es. 199 km))
 }

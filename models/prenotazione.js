@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 
 var prenotazioneSchema = new Schema({
+    emailUtente:{ type :String, required : true},
     viaPartenza: { type: String, required: true },
     numeroCivicoPartenza: { type: Number, required: true },
     capPartenza: {type: Number, required: true},

@@ -8,10 +8,10 @@ const path = require('path');
 const modelsTraslocatori = require("./models/traslocatore.js");
 const listaTraslocatori = modelsTraslocatori.traslocatori;
 const controllersTraslocatori = require("./controllers/traslocatore.js");
+const controllersPrenotazione = require("./controllers/prenotazione.js");
 const controlloTraslocatoriInizialiDelDatabase = controllersTraslocatori.controlloTraslocatoriInizialiDatabase;
 const modelsPrenotazione = require("./models/prenotazione.js");
 const modelloPrenotazione = modelsPrenotazione.modelloPrenotazione;
-
 var controllersUser = require("./controllers/user.js");
 const modelsUser = require('./models/user');
 const modelloUtenti = modelsUser.modelloUtenti;
@@ -22,6 +22,8 @@ var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
 var globalUser;
+
+var controlloPrenotazione = require('./controllers/prenotazione')
 
 const modelloTraslocatori = require('./models/traslocatore').modelloTraslocatore;
 
@@ -406,6 +408,7 @@ server.post("/prenotazione/locale", checkAuthentication, function (req, res) {
     }*/
 
     var DatiPrenotazione = {
+        emailUtente : globalUser.email,
         viaPartenza : req.body.viaPartenza,
         numeroCivicoPartenza: req.body.numeroCivicoPartenza,
         capPartenza: req.body.capPartenza,
@@ -431,6 +434,7 @@ server.post("/prenotazione/locale", checkAuthentication, function (req, res) {
 
 
     var newPrenotazione = new modelloPrenotazione({
+        emailUtente: DatiPrenotazione.emailUtente.toString().toLowerCase(),
         viaPartenza: DatiPrenotazione.viaPartenza.toString().toLowerCase(),
         numeroCivicoPartenza: DatiPrenotazione.numeroCivicoPartenza.toString(),
         capPartenza: DatiPrenotazione.capPartenza.toString(),
@@ -458,6 +462,10 @@ server.post("/prenotazione/locale", checkAuthentication, function (req, res) {
     newPrenotazione.save(function (err) {
         if (err) return res.status(500).send();
     });
+    var indirizzoCarico = DatiPrenotazione.viaPartenza + ", " + DatiPrenotazione.cittaPartenza +", " + "fermo" + ", " + DatiPrenotazione.statoPartenza;
+    var traslocatorePiuVicino = googleMapsController.getTraslocatorePiuVicino(indirizzoCarico);
+
+    console.log(traslocatorePiuVicino);
 
     res.render("prenotazione");
 
@@ -575,18 +583,6 @@ server.get('/logout', checkAuthentication, function (req, res, next) {
 });
 
 
-/*    TODO:---> DA VERIFICARE MEGLIO IL FUNZIONAMENTO DI NEXT()
-function verificaAutenticazione(req, res, next) {
-    if (session) {
-        return next();
-    } else {
-        var err = new Error('DEVI ESSERE LOGGATO PER VEDERE QUESTI CONTENUTI 8)');
-        err.status = 401;
-        return next(err);
-    }
-}
-*/
-
 server.post('/login/locale', checkNotAuthentication, function (req, res) {
 
     var email = req.body.email;
@@ -630,6 +626,9 @@ server.post('/login/locale', checkNotAuthentication, function (req, res) {
                 loggato = true;
                 globalUser = req.session.utente;
                 console.log('login effettuato');
+                console.log(globalUser + "  GLOBALUSER");
+                console.log(globalUser.email + "   GLOBALUSER PUNTO EMAIL");
+               // await controllersPrenotazione.calcolaPrezzo(globalUser.email );
                 res.render('home', { loggato });
             }
         })
@@ -663,4 +662,6 @@ function checkNotAuthentication(req, res, next) {
     }
 }
 
-module.exports = Utente;
+
+
+module.exports = globalUser;
