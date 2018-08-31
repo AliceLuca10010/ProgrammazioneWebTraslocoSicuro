@@ -377,7 +377,7 @@ server.get("/prenotazione", checkAuthentication, function (req, res) {
     res.render('prenotazione', globalUser);
 });
 
-server.post("/prenotazione/locale", checkAuthentication, function (req, res) {
+server.post("/prenotazione/locale", checkAuthentication, async function (req, res) {
    /* var DatiPrenotazione = {
         indirizzoPartenza: {
             via: req.body.viaPartenza,
@@ -457,7 +457,25 @@ server.post("/prenotazione/locale", checkAuthentication, function (req, res) {
 
     });
 
+    //inizializzo gli array che mi serviranno
+    indirizzoPartenzaUtente = [DatiPrenotazione.viaPartenza + ", " + DatiPrenotazione.cittaPartenza + ", " + DatiPrenotazione.statoPartenza];
+    indirizzoArrivoUtente = [DatiPrenotazione.viaArrivo + ", " + DatiPrenotazione.cittaArrivo + ", " + DatiPrenotazione.statoArrivo]
+    indirizziTraslocatori = await inizializzaDestinazioni();
 
+    //chiamo il metodo getTraslocatore più vicino
+    googleMapsController.getTraslocatorePiuVicino(indirizzoPartenzaUtente, indirizziTraslocatori, function (traslocatore) {
+        //qui dentro traslocatore = traslocatorepiùvicino
+        console.log("il traslocatore più vicino all'utente è la ditta " + traslocatore.nomeAzienda + " con sede in " + traslocatore.indirizzoAzienda);
+        
+        //chiamo il metodo getDistance
+        googleMapsController.getDistance(indirizzoPartenzaUtente, indirizzoArrivoUtente, function (distanceValue, distanceText) {
+            //qui dentro distanceValue (int) è il valore in metri della distanza tra i due indirizzi
+            //distance text è il corrispettivo (string) in km
+            //traslocatore è il traslocatore più vicino (perchè mi trovo ancora dentro a getTraslocatorePiuVicino)
+            console.log("traslocatore più vicino = " + traslocatore.nomeAzienda);
+            console.log("distanza tra " + indirizzoPartenzaUtente[0] + " e " + indirizzoArrivoUtente[0] + " = " + distanceValue + "metri e " + distanceText );
+        })
+    });
 
     newPrenotazione.save(function (err) {
         if (err) return res.status(500).send();
