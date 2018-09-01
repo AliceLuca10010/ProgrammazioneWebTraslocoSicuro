@@ -8,7 +8,6 @@ const path = require('path');
 const modelsTraslocatori = require("./models/traslocatore.js");
 const listaTraslocatori = modelsTraslocatori.traslocatori;
 const controllersTraslocatori = require("./controllers/traslocatore.js");
-const controllersPrenotazione = require("./controllers/prenotazione.js");
 const controlloTraslocatoriInizialiDelDatabase = controllersTraslocatori.controlloTraslocatoriInizialiDatabase;
 const modelsPrenotazione = require("./models/prenotazione.js");
 const modelloPrenotazione = modelsPrenotazione.modelloPrenotazione;
@@ -25,7 +24,6 @@ const mongoose = require('mongoose');
 
 var globalUser;
 
-var controlloPrenotazione = require('./controllers/prenotazione')
 
 const modelloTraslocatori = require('./models/traslocatore').modelloTraslocatore;
 
@@ -673,7 +671,7 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
               //in base alle stanze scelte sommo i costi del traslocatore al costoSmontaggioRiassemblaggio
               var costoSmontaggioRiassemblaggio = 0;
 
-              if(DatiPrenotazione.imballaggio == "true"){
+              if(DatiPrenotazione.smontaggioRiassemblaggio == "true"){
                   for (var i = 0; i < DatiPrenotazione.stanze.length; i++) {
   
                       switch (DatiPrenotazione.stanze[i]) {
