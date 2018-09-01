@@ -82,8 +82,8 @@ function getTraslocatorePiuVicino(origins, destinations, callback) {
                         if (distanceValue <= min) {
                             //distanceValue diventa il nuovo min
                             min = distanceValue;
-                            //mi salvo inl valore di j
-                            nearestDestiationIndex = j;
+                            //mi salvo il valore di j
+                            nearestDestinationIndex = j;
                         }
                     } else {
                         //se il calcolo della distanza non è stato possibile stampo messaggio di errore
@@ -128,6 +128,13 @@ function getDistance(origins, destinations, callback) {
                         //mi salvo il testo della distanza (es. 10,8 km)
                         var distanceText = distances.rows[i].elements[j].distance.text;
                         //console.log('Distance from ' + origin + ' to ' + destination + ' is ' + distanceText); //5,...
+                        if(distanceValue <= min){
+                            min = distanceValue;
+                            nearestDestination = j;
+
+                        }
+
+
                     } else {
                         //se il calcolo della distanza non è stato possibile stampo messaggio di errore
                         console.log(destination + ' is not reachable by land from ' + origin);

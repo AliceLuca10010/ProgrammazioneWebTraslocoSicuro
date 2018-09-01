@@ -21,6 +21,8 @@ const postino = require('./controllers/postino');
 var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 
+
+
 var globalUser;
 
 var controlloPrenotazione = require('./controllers/prenotazione')
@@ -260,7 +262,7 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
                 bootstrapClasses: "text-left alert alert-danger",
 
             });
-           
+
         }
 
 
@@ -295,9 +297,9 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
                         datiUtenteEmail: utente.email,
                         messaggioErrore: "le password inserite non coincidono ",
                         bootstrapClasses: "text-left alert alert-danger",
-        
+
                     });
-                    
+
                 }
 
 
@@ -311,9 +313,9 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
                     datiUtenteEmail: utente.email,
                     messaggioErrore: " le password inserite non sono valide ",
                     bootstrapClasses: "text-left alert alert-danger",
-    
+
                 });
-                
+
             }
 
 
@@ -378,45 +380,18 @@ server.get("/prenotazione", checkAuthentication, function (req, res) {
 });
 
 server.post("/prenotazione/locale", checkAuthentication, async function (req, res) {
-   /* var DatiPrenotazione = {
-        indirizzoPartenza: {
-            via: req.body.viaPartenza,
-            numero: req.body.numeroCivicoPartenza,
-            cap: req.body.capPartenza,
-            città: req.body.cittàPartenza,
-            stato: req.body.statoPartenza,
-            piano: req.body.pianoPartenza,
-            ascensore: req.body.ascensorePartenza,
-        },
-        indirizzoArrivo: {
-            via: req.body.viaArrivo,
-            numero: req.body.numeroCivicoArrivo,
-            cap: req.body.capArrivo,
-            città: req.body.cittàArrivo,
-            stato: req.body.statoArrivo,
-            piano: req.body.pianoArrivo,
-            ascensore: req.body.ascensorearrivo
-        },
-        infoAbitazione: {
-            stanze: req.body.stanza
-        },
-        serviziAggiuntivi: {
-            imballaggio: req.body.imballaggio,
-            smontaggioRimontaggio: req.body.smontaggioRiassemblaggio,
-            depositoMerci: req.body.depositoMerci,
-        },
-    }*/
+
 
     var DatiPrenotazione = {
-        emailUtente : globalUser.email,
-        viaPartenza : req.body.viaPartenza,
+        emailUtente: globalUser.email,
+        viaPartenza: req.body.viaPartenza,
         numeroCivicoPartenza: req.body.numeroCivicoPartenza,
         capPartenza: req.body.capPartenza,
         cittaPartenza: req.body.cittaPartenza,
         statoPartenza: req.body.statoPartenza,
         ascensorePartenza: req.body.ascensorePartenza,
         pianoPartenza: req.body.pianoPartenza,
-        viaArrivo : req.body.viaArrivo,
+        viaArrivo: req.body.viaArrivo,
         numeroCivicoArrivo: req.body.numeroCivicoArrivo,
         capArrivo: req.body.capArrivo,
         cittaArrivo: req.body.cittaArrivo,
@@ -428,9 +403,9 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
         smontaggioRiassemblaggio: req.body.smontaggioRiassemblaggio,
         depositoMerci: req.body.depositoMerci,
 
-      
+
     }
-    
+
 
 
     var newPrenotazione = new modelloPrenotazione({
@@ -438,52 +413,345 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
         viaPartenza: DatiPrenotazione.viaPartenza.toString().toLowerCase(),
         numeroCivicoPartenza: DatiPrenotazione.numeroCivicoPartenza.toString(),
         capPartenza: DatiPrenotazione.capPartenza.toString(),
-        cittaPartenza : DatiPrenotazione.cittaPartenza.toString().toLowerCase(),
-        statoPartenza : DatiPrenotazione.statoPartenza.toString().toLowerCase(),
-        ascensorePartenza : DatiPrenotazione.ascensorePartenza.toString(),
-        pianoPartenza : DatiPrenotazione.pianoPartenza.toString(),
+        cittaPartenza: DatiPrenotazione.cittaPartenza.toString().toLowerCase(),
+        statoPartenza: DatiPrenotazione.statoPartenza.toString().toLowerCase(),
+        ascensorePartenza: DatiPrenotazione.ascensorePartenza.toString(),
+        pianoPartenza: DatiPrenotazione.pianoPartenza.toString(),
         viaArrivo: DatiPrenotazione.viaArrivo.toString().toLowerCase(),
         numeroCivicoArrivo: DatiPrenotazione.numeroCivicoArrivo.toString(),
         capArrivo: DatiPrenotazione.capArrivo.toString(),
-        cittaArrivo : DatiPrenotazione.cittaArrivo.toString().toLowerCase(),
-        statoArrivo : DatiPrenotazione.statoArrivo.toString().toLowerCase(),
-        ascensoreArrivo : DatiPrenotazione.ascensoreArrivo.toString().toLowerCase(),
-        pianoArrivo : DatiPrenotazione.pianoArrivo.toString(),
-        stanze : DatiPrenotazione.stanze,
-        imballaggio : DatiPrenotazione.imballaggio.toString().toLowerCase(),
+        cittaArrivo: DatiPrenotazione.cittaArrivo.toString().toLowerCase(),
+        statoArrivo: DatiPrenotazione.statoArrivo.toString().toLowerCase(),
+        ascensoreArrivo: DatiPrenotazione.ascensoreArrivo.toString().toLowerCase(),
+        pianoArrivo: DatiPrenotazione.pianoArrivo.toString(),
+        stanze: DatiPrenotazione.stanze,
+        imballaggio: DatiPrenotazione.imballaggio.toString().toLowerCase(),
         smontaggioRiassemblaggio: DatiPrenotazione.smontaggioRiassemblaggio.toString().toLowerCase(),
         depositoMerci: DatiPrenotazione.depositoMerci.toString().toLowerCase(),
-        
+
 
     });
 
     //inizializzo gli array che mi serviranno
     indirizzoPartenzaUtente = [DatiPrenotazione.viaPartenza + ", " + DatiPrenotazione.cittaPartenza + ", " + DatiPrenotazione.statoPartenza];
     indirizzoArrivoUtente = [DatiPrenotazione.viaArrivo + ", " + DatiPrenotazione.cittaArrivo + ", " + DatiPrenotazione.statoArrivo]
-    indirizziTraslocatori = await inizializzaDestinazioni();
+    //  indirizziTraslocatori = await inizializzaDestinazioni();
+
+
 
     //chiamo il metodo getTraslocatore più vicino
     googleMapsController.getTraslocatorePiuVicino(indirizzoPartenzaUtente, indirizziTraslocatori, function (traslocatore) {
         //qui dentro traslocatore = traslocatorepiùvicino
+
         console.log("il traslocatore più vicino all'utente è la ditta " + traslocatore.nomeAzienda + " con sede in " + traslocatore.indirizzoAzienda);
-        
+
+
+
+
         //chiamo il metodo getDistance
         googleMapsController.getDistance(indirizzoPartenzaUtente, indirizzoArrivoUtente, function (distanceValue, distanceText) {
             //qui dentro distanceValue (int) è il valore in metri della distanza tra i due indirizzi
             //distance text è il corrispettivo (string) in km
             //traslocatore è il traslocatore più vicino (perchè mi trovo ancora dentro a getTraslocatorePiuVicino)
-            console.log("traslocatore più vicino = " + traslocatore.nomeAzienda);
-            console.log("distanza tra " + indirizzoPartenzaUtente[0] + " e " + indirizzoArrivoUtente[0] + " = " + distanceValue + "metri e " + distanceText );
+            var costoDistanza;
+            //salvo il costo della giusta distanza in costoDistanza. il costo sarà diverso in base alle fasce di km
+            if ((distanceValue / 1000) > 400) {
+                if ((distanceValue / 1000) > 800) {
+                    //maggiore 800
+                    costoDistanza = traslocatore.costoDistanza.sopra800km;
+
+                } else {
+                    //tra 400 e 800
+                    costoDistanza = traslocatore.costoDistanza.tra400e800km;
+
+                }
+
+            } else {
+
+                costoDistanza = traslocatore.costoDistanza.minore400km;
+                //minore 400
+            }
+            console.log(costoDistanza + "costoDistanza");
+
+            var costoDifficolta;
+
+            //calcolo il costo della difficoltà in base alla posizione dell'abitazione. il costo sarà diverso se l'abitazione
+            //si trova al piano terra, se ha l'ascensore e in caso negativo il costo sarà diverso in base al piano.
+            //controllo qual è il caso specifico per l'abitazione di carico e poi quella di scarico e per entrambe
+            //aggiungo il costo specifico in costoDifficolta
+
+            if (DatiPrenotazione.ascensorePartenza === "true") {
+                costoDifficolta = traslocatore.costoDifficolta.ascensore;
+
+            } else {
+                if (DatiPrenotazione.pianoPartenza === 0) {
+                    costoDifficolta = traslocatore.costoDifficolta.pianoterra;
+                }
+                else {
+                    if (DatiPrenotazione.pianoPartenza === 1 || DatiPrenotazione.pianoPartenza === 2) {
+                        costoDifficolta = traslocatore.costoDifficolta.senzaAscensorePrimiPiani;
+                    }
+                    else {
+                        costoDifficolta = traslocatore.costoDifficolta.senzaAscensoreUltimiPiani;
+                    }
+
+                }
+            }
+
+            if (DatiPrenotazione.ascensoreArrivo === "true") {
+                costoDifficolta += traslocatore.costoDifficolta.ascensore;
+
+            } else {
+                if (DatiPrenotazione.pianoArrivo === 0) {
+                    costoDifficolta += traslocatore.costoDifficolta.pianoterra;
+                }
+                else {
+                    if (DatiPrenotazione.pianoArrivo === 1 || DatiPrenotazione.pianoArrivo === 2) {
+                        costoDifficolta += traslocatore.costoDifficolta.senzaAscensorePrimiPiani;
+                    }
+                    else {
+                        costoDifficolta += traslocatore.costoDifficolta.senzaAscensoreUltimiPiani;
+                    }
+
+                }
+            }
+
+            console.log(costoDifficolta + "costoDifficoltà");
+
+            var costoDeposito;
+            //calcolo il costo del depositoMerci se questo servizio viene scelto. Il costo dipende dal numero di stanze.
+
+            if (DatiPrenotazione.depositoMerci === "true") {
+                costoDeposito = DatiPrenotazione.stanze.length * 2.5 * traslocatore.costoDepositoMerci;
+
+            }
+            else { //se il deposito merci non è stato scelto come servizio
+                costoDeposito = 0;
+            }
+
+            console.log(costoDeposito + "costoDeposito");
+
+
+            //in base alle stanze scelte sommo i costi del traslocatore al costoBase
+
+            var costoBase = 0;
+
+            for (var i = 0; i < DatiPrenotazione.stanze.length; i++) {
+
+                switch (DatiPrenotazione.stanze[i]) {
+
+                    case "cucina":
+                        costoBase += traslocatore.costiBaseStanze.cucina;
+                        break;
+
+                    case "salone":
+                        costoBase += traslocatore.costiBaseStanze.salone;
+
+                        break;
+
+                    case "salaDaPranzo":
+                        costoBase += traslocatore.costiBaseStanze.salaDaPranzo;
+                        break;
+
+                    case "camera":
+                        costoBase += traslocatore.costiBaseStanze.camera;
+                        break;
+
+                    case "bagno":
+                        costoBase += traslocatore.costiBaseStanze.bagno;
+                        break;
+
+                    case "ingresso":
+                        costoBase += traslocatore.costiBaseStanze.ingresso;
+                        break;
+
+                    case "studio":
+                        costoBase += traslocatore.costiBaseStanze.studio;
+                        break;
+
+                    case "balcone":
+                        costoBase += traslocatore.costiBaseStanze.balcone;
+                        break;
+
+                    case "soffitta":
+                        costoBase += traslocatore.costiBaseStanze.soffitta;
+                        break;
+
+                    case "giardino":
+                        costoBase += traslocatore.costiBaseStanze.giardino;
+                        break;
+
+                    case "boxGarage":
+                        costoBase += traslocatore.costiBaseStanze.boxGarage;
+
+                        break;
+
+                    case "ripostiglio":
+                        costoBase += traslocatore.costiBaseStanze.ripostiglio;
+                        break;
+
+                    case "cantina":
+                        costoBase += traslocatore.costiBaseStanze.cantina;
+                        break;
+
+                }
+            }
+
+
+            console.log(costoBase + "costoBase");
+
+
+            //in base alle stanze scelte sommo i costi del traslocatore al costoImballaggio
+            var costoImballaggio = 0;
+
+            if(DatiPrenotazione.imballaggio == "true"){
+                for (var i = 0; i < DatiPrenotazione.stanze.length; i++) {
+
+                    switch (DatiPrenotazione.stanze[i]) {
+    
+                        case "cucina":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.cucina;
+                            break;
+    
+                        case "salone":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.salone;
+    
+                            break;
+    
+                        case "salaDaPranzo":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.salaDaPranzo;
+                            break;
+    
+                        case "camera":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.camera;
+                            break;
+    
+                        case "bagno":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.bagno;
+                            break;
+    
+                        case "ingresso":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.ingresso;
+                            break;
+    
+                        case "studio":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.studio;
+                            break;
+    
+                        case "balcone":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.balcone;
+                            break;
+    
+                        case "soffitta":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.soffitta;
+                            break;
+    
+                        case "giardino":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.giardino;
+                            break;
+    
+                        case "boxGarage":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.boxGarage;
+    
+                            break;
+    
+                        case "ripostiglio":
+                        costoImballaggio += traslocatore.costiBaseStanze.ripostiglio;
+                            break;
+    
+                        case "cantina":
+                        costoImballaggio += traslocatore.costiBaseStanze.cantina;
+                            break;
+    
+                    }
+                }
+            }
+
+            console.log(costoImballaggio + "costoImballaggio");
+
+
+              //in base alle stanze scelte sommo i costi del traslocatore al costoSmontaggioRiassemblaggio
+              var costoSmontaggioRiassemblaggio = 0;
+
+              if(DatiPrenotazione.imballaggio == "true"){
+                  for (var i = 0; i < DatiPrenotazione.stanze.length; i++) {
+  
+                      switch (DatiPrenotazione.stanze[i]) {
+      
+                          case "cucina":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.cucina;
+                              break;
+      
+                          case "salone":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.salone;
+      
+                              break;
+      
+                          case "salaDaPranzo":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.salaDaPranzo;
+                              break;
+      
+                          case "camera":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.camera;
+                              break;
+      
+                          case "bagno":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.bagno;
+                              break;
+      
+                          case "ingresso":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.ingresso;
+                              break;
+      
+                          case "studio":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.studio;
+                              break;
+      
+                          case "balcone":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.balcone;
+                              break;
+      
+                          case "soffitta":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.soffitta;
+                              break;
+      
+                          case "giardino":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.giardino;
+                              break;
+      
+                          case "boxGarage":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.boxGarage;
+      
+                              break;
+      
+                          case "ripostiglio":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.ripostiglio;
+                              break;
+      
+                          case "cantina":
+                          costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.cantina;
+                              break;
+      
+                      }
+                  }
+              }
+  
+              console.log(costoSmontaggioRiassemblaggio + "costoSmontaggioRiassemblaggio");
+
+              var costoTotale = costoBase + costoImballaggio + costoSmontaggioRiassemblaggio + costoDeposito +costoDifficolta + costoDistanza;
+
+
+              console.log("il costo totale è " + costoTotale);
+
+
         })
     });
+
 
     newPrenotazione.save(function (err) {
         if (err) return res.status(500).send();
     });
-    var indirizzoCarico = DatiPrenotazione.viaPartenza + ", " + DatiPrenotazione.cittaPartenza +", " + "fermo" + ", " + DatiPrenotazione.statoPartenza;
-    var traslocatorePiuVicino = googleMapsController.getTraslocatorePiuVicino(indirizzoCarico);
 
-    console.log(traslocatorePiuVicino);
 
     res.render("prenotazione");
 
@@ -646,7 +914,7 @@ server.post('/login/locale', checkNotAuthentication, function (req, res) {
                 console.log('login effettuato');
                 console.log(globalUser + "  GLOBALUSER");
                 console.log(globalUser.email + "   GLOBALUSER PUNTO EMAIL");
-               // await controllersPrenotazione.calcolaPrezzo(globalUser.email );
+                // await controllersPrenotazione.calcolaPrezzo(globalUser.email );
                 res.render('home', { loggato });
             }
         })
