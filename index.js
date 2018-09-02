@@ -407,7 +407,6 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
 
         var DatiPrenotazione = {
             emailUtente: req.session.utente.email,
-            aziendaTraslochi: traslocatore.nomeAzienda,
             viaPartenza: req.body.viaPartenza,
             numeroCivicoPartenza: req.body.numeroCivicoPartenza,
             capPartenza: req.body.capPartenza,
@@ -428,7 +427,8 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
             imballaggio: req.body.imballaggio,
             smontaggioRiassemblaggio: req.body.smontaggioRiassemblaggio,
             depositoMerci: req.body.depositoMerci,
-            costoTotale: 0
+            costoTotale: 0,
+            traslocatore: null
         }
 
         req.session.prenotazione = DatiPrenotazione;
@@ -448,6 +448,7 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
             });*/
 
             req.session.prenotazione.costoTotale = costoTotale;
+            req.session.prenotazione.traslocatore = traslocatore;
 
             console.log("req.session.prenotazione = ", req.session.prenotazione);
             var DatiPrenotazione = req.session.prenotazione;
@@ -468,7 +469,6 @@ server.post('/confermaPreventivo', async function (req, res) {
 
         var newPrenotazione = new modelloPrenotazione({
             emailUtente: DatiPrenotazione.emailUtente.toString().toLowerCase(),
-            aziendaTraslochi: DatiPrenotazione.aziendaTraslochi,
             viaPartenza: DatiPrenotazione.viaPartenza.toString().toLowerCase(),
             numeroCivicoPartenza: DatiPrenotazione.numeroCivicoPartenza.toString(),
             capPartenza: DatiPrenotazione.capPartenza.toString(),
@@ -489,7 +489,8 @@ server.post('/confermaPreventivo', async function (req, res) {
             imballaggio: DatiPrenotazione.imballaggio.toString().toLowerCase(),
             smontaggioRiassemblaggio: DatiPrenotazione.smontaggioRiassemblaggio.toString().toLowerCase(),
             depositoMerci: DatiPrenotazione.depositoMerci.toString().toLowerCase(),
-            costoTotale: req.session.prenotazione.costoTotale
+            costoTotale: req.session.prenotazione.costoTotale,
+            traslocatore: req.session.prenotazione.traslocatore
         });
 
         console.log(newPrenotazione);

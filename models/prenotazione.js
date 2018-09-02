@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ModelloTraslocatore = require('./traslocatore');
+
 
 var prenotazioneSchema = new Schema({
     emailUtente:{ type :String, required : true},
-    aziendaTraslochi: {type: String, required: true},
     viaPartenza: { type: String, required: true },
     numeroCivicoPartenza: { type: Number, required: true },
     capPartenza: {type: Number, required: true},
@@ -25,7 +26,8 @@ var prenotazioneSchema = new Schema({
     imballaggio :{type: String, required: true},
     smontaggioRiassemblaggio : {type: String, required: true},
     depositoMerci : {type: String, required: true},
-    costoTotale : {type: Number, required: true}
+    costoTotale : {type: Number, required: true},
+    traslocatore : {type: ModelloTraslocatore , required:true}
 });
 
 var modelloPrenotazione = mongoose.model('prenotazione', prenotazioneSchema, 'prenotazione');
