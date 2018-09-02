@@ -4,10 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-   
-
-
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
 
@@ -21,7 +18,7 @@
 
             <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
                 <button type="button" class="btn btn-custom "><a href="..">Home</a>
-    
+
                 </button>
             </div>
 
@@ -60,21 +57,21 @@
 
             <div class="col-sm-2 col-xs-2 col-lg-2 col-md-2 btn-group dropup">
                 <button type="button" class="btn btn-custom "><a href="/login">Accedi</a>
-    
+
                 </button>
             </div>
 
         </div>
 
-
-
         <div class="row">
             <div class="col">
                 <h2 class="pt-3 pb-3 text-center"> Registrati</h2>
-                <p class="<%=bootstrapClasses%>"><%=messaggioErrore%></p>
+                <p class="<%=bootstrapClasses%>">
+                    <%=messaggioErrore%>
+                </p>
             </div>
         </div>
-        
+
         <form method="POST" action="/registrati/locale">
             <div class="row">
                 <div class="col-6">
@@ -104,11 +101,6 @@
                         <label for="dataNascita">Data di Nascita: </label>
                         <input type="date" class="form-control" id="dataNascita" name="dataNascita" required>
                     </div>
-
-
-
-
-
                 </div>
                 <div class="col-6">
 
@@ -145,7 +137,7 @@
                 </div>
             </div>
 
-            
+
 
             <div class="row pt-1 pt-2">
                 <div class="col-12 text-center">
