@@ -133,19 +133,6 @@ server.get("/conChiLavoriamo", async function (req, res) {
     }
 });
 
-server.get("/condizioniDiVendita", function (req, res) {
-    if (req.session && req.session.utente) {
-        loggato = true;
-        return res.render('condizioniDiVendita', {
-            loggato,
-        });
-    } else {
-        loggato = false;
-        return res.render('condizioniDiVendita', {
-            loggato,
-        });
-    }
-});
 server.get("/contattaci", function (req, res) {
     if (req.session && req.session.utente) {
         loggato = true;
