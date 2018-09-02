@@ -11,28 +11,22 @@ var controllersUser = require("./controllers/user.js");
 const modelloUtenti = require('./models/user');
 const dotenv = require('dotenv').config();
 const postino = require('./controllers/postino');
-var MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
-
+const modelloTraslocatori = require('./models/traslocatore').modelloTraslocatore;
+const googleMapsController = require('./controllers/googleMaps');
 var controllerPrenotazione = require('./controllers/prenotazione');
+
 var preventivoConfermato;
 var costoTotale;
 
-
+controllerTraslocatori.controlloTraslocatoriInizialiDatabase(listaTraslocatori);
 
 var globalUser;
 
-
-const modelloTraslocatori = require('./models/traslocatore').modelloTraslocatore;
-
-var indirizzoUtente = [];
 var indirizziTraslocatori = [];
 var indirizzoPartenzaUtente = [];
 var indirizzoArrivoUtente = [];
 
-controllerTraslocatori.controlloTraslocatoriInizialiDatabase(listaTraslocatori);
-
-const googleMapsController = require('./controllers/googleMaps');
 var bcrypt = require('bcrypt');
 server.use(express.static("public"));
 server.use(bodyParser.json());
@@ -232,6 +226,31 @@ server.get("/modificaInfo", checkAuthentication, async function (req, res) {
 });
 
 
+server.get('/registrati', checkNotAuthentication, function (req, res) {
+    res.render('registrati', {
+        messaggioErrore: "",
+        bootstrapClasses: ""
+    });
+});
+
+server.get("/prenotazione", checkAuthentication, async function (req, res) {
+    var prenotazione = await modelloPrenotazione.findOne({ emailUtente: req.session.utente.email });
+    res.render('prenotazione', { prenotazione });
+});
+
+server.get('/logout', checkAuthentication, function (req, res, next) {
+    if (req.session && req.session.utente) {
+        // delete session objecT
+        req.session = null;
+        session = null;
+        loggato = false;
+        indirizzoUtente = [];
+        res.render('home', {
+            loggato
+        });
+    }
+    return;
+});
 
 server.post("/modificaInformazioni/Locale", checkAuthentication, async function (req, res) {
 
@@ -240,7 +259,8 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
     if (req.body.nuovaEmail !== "" && req.body.confermaNuovaEmail !== "") {
         if (req.body.nuovaEmail === req.body.confermaNuovaEmail) {
             //salvo l'email nel database
-            await modelloUtenti.findOneAndUpdate({ email: utente.email }, { email: req.body.nuovaEmail });
+            var nuovaEmail = req.body.nuovaEmail.toLowerCase();
+            await modelloUtenti.findOneAndUpdate({ email: utente.email }, { email: nuovaEmail });
             utente.email = req.body.nuovaEmail;
 
 
@@ -324,7 +344,7 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
 
 
     if (req.body.nome != "") {
-        await modelloUtenti.findOneAndUpdate({ email: utente.email }, { nome: req.body.nome });
+        await modelloUtenti.findOneAndUpdate({ email: utente.email }, { nome: req.body.nome});
         utente.nome = req.body.nome;
     }
 
@@ -352,27 +372,6 @@ server.post("/modificaInformazioni/Locale", checkAuthentication, async function 
 
 });
 
-
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-
-
-
-
-
-
-server.get('/registrati', checkNotAuthentication, function (req, res) {
-    res.render('registrati', {
-        messaggioErrore: "",
-        bootstrapClasses: ""
-    });
-});
-
-server.get("/prenotazione", checkAuthentication, async function (req, res) {
-    var prenotazione = await modelloPrenotazione.findOne({ emailUtente: req.session.utente.email });
-    res.render('prenotazione', { prenotazione });
-});
 
 server.post("/prenotazione/locale", checkAuthentication, async function (req, res) {
 
@@ -571,21 +570,6 @@ server.post('/registrati/locale', checkNotAuthentication, async function (req, r
 
     //CHIUSURA REGISTRATI LOCALE
 });
-
-server.get('/logout', checkAuthentication, function (req, res, next) {
-    if (req.session && req.session.utente) {
-        // delete session objecT
-        req.session = null;
-        session = null;
-        loggato = false;
-        indirizzoUtente = [];
-        res.render('home', {
-            loggato
-        });
-    }
-    return;
-});
-
 
 server.post('/login/locale', checkNotAuthentication, async function (req, res) {
 
