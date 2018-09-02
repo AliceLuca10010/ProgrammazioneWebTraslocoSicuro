@@ -70,6 +70,16 @@
 
 
         </div>
+        <% if (prenotazione) { %>
+            <div class="container p-5">
+                <div class="row">
+                    <div class="col text-center">
+                        <h3>Hai già una prenotazione effettuata</h3>
+                        <h4>Vai su <a class="text-danger" href="/iMieiAppuntamenti">i miei appuntamenti</a> per visionarla</h4>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
         <div class="row">
             <div class="col">
                 <h2 class="text-center p-4"> Prenota un Apputamento </h2>
@@ -90,17 +100,26 @@
                             <input type="number" class="form-control" id="numeroCivicoPartenza" name="numeroCivicoPartenza" required>
                         </div>
                         <div class="form-group">
+                            <label for="cittaPartenza">Città: </label>
+                            <input type="text" class="form-control" id="cittaPartenza" name="cittaPartenza" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="provinciaPartenza">Provincia: </label>
+                            <input type="text" class="form-control" id="provinciaPartenza" name="provinciaPartenza" required>
+                        </div>
+                        <div class="form-group">
                             <label for="capPartenza">Cap: </label>
                             <input type="number" class="form-control" id="capPartenza" name="capPartenza" required>
+                        </div>
+                        <div class="form-group ">
+                            <label for="statoPartenza">Stato: </label>
+                            <input type="text" class="form-control" id="statoPartenza" name="statoPartenza" required>
                         </div>
                         <div class="form-group ">
                             <label for="pianoPartenza">Piano: </label>
                             <input type="number" class="form-control" id="pianoPartenza" name="pianoPartenza" required>
                         </div>
-                        <div class="form-group">
-                            <label for="cittaPartenza">Città: </label>
-                            <input type="text" class="form-control" id="cittaPartenza" name="cittaPartenza" required>
-                        </div>
+                        
                         <div class="form-check">
                             <p> Ascensore: </p>
 
@@ -116,10 +135,7 @@
                         </div> <br>
 
 
-                        <div class="form-group ">
-                            <label for="statoPartenza">Stato: </label>
-                            <input type="text" class="form-control" id="statoPartenza" name="statoPartenza" required>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-6">
@@ -134,18 +150,26 @@
                             <input type="number" class="form-control" id="numeroCivicoArrivo" name="numeroCivicoArrivo" required>
                         </div>
                         <div class="form-group">
+                            <label for="cittaArrivo">Città: </label>
+                            <input type="text" class="form-control" id="cittaArrivo" name="cittaArrivo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="provinciaArrivo">Provincia: </label>
+                            <input type="text" class="form-control" id="provinciaArrivo" name="provinciaArrivo" required>
+                        </div>
+                        <div class="form-group">
                             <label for="capArrivo">Cap: </label>
                             <input type="number" class="form-control" id="capArrivo" name="capArrivo" required>
                         </div>
                         <div class="form-group ">
+                            <label for="statoArrivo">Stato: </label>
+                            <input type="text" class="form-control" id="statoArrivo" name="statoArrivo" required>
+                        </div>                        
+
+                        <div class="form-group ">
                             <label for="pianoArrivo">Piano: </label>
                             <input type="number" class="form-control" id="pianoArrivo" name="pianoArrivo" required>
                         </div>
-                        <div class="form-group">
-                            <label for="cittaArrivo">Città: </label>
-                            <input type="text" class="form-control" id="cittaArrivo" name="cittaArrivo" required>
-                        </div>
-
                         <div class="form-check">
                             <p> Ascensore: </p>
 
@@ -158,12 +182,9 @@
                             <label class="form-check-label" for="ascensoreArrivo"> No</label>
 
 
-                        </div> <br>
-
-                        <div class="form-group ">
-                            <label for="statoArrivo">Stato: </label>
-                            <input type="text" class="form-control" id="statoArrivo" name="statoArrivo" required>
-                        </div>
+                        </div> 
+                        
+                        <br>
                     </div>
                 </div>
             </div>
@@ -173,11 +194,6 @@
                 <div class="col">
 
                     <h5> Informazioni Abitazione: </h5>
-
-
-
-
-
                     <p> Metti un segno di spunta alle stanze che compongono l'appartamento da traslocare:</p>
 
                 </div>
@@ -286,6 +302,7 @@
             <p class="p-2"></p>
 
     </form>
+    <% } %>
 
 
 
