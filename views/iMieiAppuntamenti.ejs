@@ -77,7 +77,10 @@
         <div class="row">
             <div class="col">
                 <h2 class="pt-4 text-center">Riepilogo del tuo appuntamento con la ditta:</h2>
-                <h3 class="text-center text-danger"><%=DatiPrenotazione.traslocatore.nomeAzienda%> con sede in: <%=DatiPrenotazione.traslocatore.indirizzoAzienda%></h3>
+                <h3 class="text-center text-danger">
+                    <%=DatiPrenotazione.traslocatore.nomeAzienda%> con sede in:
+                        <%=DatiPrenotazione.traslocatore.indirizzoAzienda%>
+                </h3>
 
             </div>
         </div>
@@ -115,16 +118,32 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><%=DatiPrenotazione.statoPartenza%> </td>
-                            <td><%=DatiPrenotazione.statoArrivo%> </td>
+                            <td>
+                                <%=DatiPrenotazione.statoPartenza%>
+                            </td>
+                            <td>
+                                <%=DatiPrenotazione.statoArrivo%>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Piano: <%=DatiPrenotazione.pianoPartenza%> </td>
-                            <td>Piano: <%=DatiPrenotazione.pianoArrivo%> </td>
+                            <td>Piano:
+                                <%=DatiPrenotazione.pianoPartenza%>
+                            </td>
+                            <td>Piano:
+                                <%=DatiPrenotazione.pianoArrivo%>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Ascensore: <%if (DatiPrenotazione.ascensorePartenza){%>SI<%}else{%>NO<%}%></td>
-                            <td>Ascensore: <%if (DatiPrenotazione.ascensoreArrivo){%>SI<%}else{%>NO<%}%></td>
+                            <td>Ascensore:
+                                <%if (DatiPrenotazione.ascensorePartenza){%>SI
+                                    <%}else{%>NO
+                                        <%}%>
+                            </td>
+                            <td>Ascensore:
+                                <%if (DatiPrenotazione.ascensoreArrivo){%>SI
+                                    <%}else{%>NO
+                                        <%}%>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -148,82 +167,278 @@
                 <thead>
                     <tr>
                         <th scope="col">Stanza</th>
-                        <th scope="col">Costo</th>
+                        <th scope="col">Costo (BASE + IMBALLAGGIO + SMONTAGGIO/MONTAGGIO</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Cucina</td>
-                        <td class="text-right">Costo</td>
-                    </tr>
-                    <tr>
-                        <td>Salone</td>
-                        <td class="text-right">Costo</td>
-                    </tr>
-                    <tr>
-                        <td> Salone 2 </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Sala da pranzo </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Camera </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Camera 2 </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Cameretta </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Cameretta 2 </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Bagno </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Bagno 2 </td>
-                        <td class="text-right"> Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Ingresso </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Studio </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Balcone </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Soffitta </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Giardino </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Box/Garage </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Ripostiglio </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
-                    <tr>
-                        <td> Cantina </td>
-                        <td class="text-right">Costo </td>
-                    </tr>
+                    <% if (DatiPrenotazione.stanze.includes("cucina")) { %>
+                        <tr>
+                            <td>Cucina</td>
+                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.cucina;
+                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.cucina;
+                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cucina;%>
+                                <td class="text-right">€
+                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                        <%=costoBase%>€ +
+                                            <%=costoImballaggio%>€ +
+                                                <%=costoSmontaggio%>€)
+                                </td>
+                        </tr>
+                        <%}%>
+                            <% if (DatiPrenotazione.stanze.includes("salone")) { %>
+                                <tr>
+                                    <td>Salone</td>
+                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salone;
+                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salone;
+                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone;%>
+                                        <td class="text-right">€
+                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                <%=costoBase%>€ +
+                                                    <%=costoImballaggio%>€ +
+                                                        <%=costoSmontaggio%>€)
+                                        </td>
+                                </tr>
+                                <%}%>
+                                    <% if (DatiPrenotazione.stanze.includes("salone2")) { %>
+                                        <tr>
+                                            <td>Salone 2</td>
+                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salone;
+                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salone;
+                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone;%>
+                                                <td class="text-right">€
+                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                        <%=costoBase%>€ +
+                                                            <%=costoImballaggio%>€ +
+                                                                <%=costoSmontaggio%>€)
+                                                </td>
+                                        </tr>
+                                        <%}%>
+                                            <% if (DatiPrenotazione.stanze.includes("salaDaPranzo")) { %>
+                                                <tr>
+                                                    <td>Sala Da Pranzo</td>
+                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salaDaPranzo;
+                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salaDaPranzo;
+                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salaDaPranzo;%>
+                                                        <td class="text-right">€
+                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                <%=costoBase%>€ +
+                                                                    <%=costoImballaggio%>€ +
+                                                                        <%=costoSmontaggio%>€)
+                                                        </td>
+                                                </tr>
+                                                <%}%>
+                                                    <% if (DatiPrenotazione.stanze.includes("camera")) { %>
+                                                        <tr>
+                                                            <td>Camera</td>
+                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
+                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
+                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                <td class="text-right">€
+                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                        <%=costoBase%>€ +
+                                                                            <%=costoImballaggio%>€ +
+                                                                                <%=costoSmontaggio%>€)
+                                                                </td>
+                                                        </tr>
+                                                        <%}%>
+                                                            <% if (DatiPrenotazione.stanze.includes("camera2")) { %>
+                                                                <tr>
+                                                                    <td>Camera 2</td>
+                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
+                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
+                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                        <td class="text-right">€
+                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                <%=costoBase%>€ +
+                                                                                    <%=costoImballaggio%>€ +
+                                                                                        <%=costoSmontaggio%>€)
+                                                                        </td>
+                                                                </tr>
+                                                                <%}%>
+                                                                    <% if (DatiPrenotazione.stanze.includes("cameretta")) { %>
+                                                                        <tr>
+                                                                            <td>Cameretta</td>
+                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
+                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
+                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                                <td class="text-right">€
+                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                        <%=costoBase%>€ +
+                                                                                            <%=costoImballaggio%>€ +
+                                                                                                <%=costoSmontaggio%>€)
+                                                                                </td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                            <% if (DatiPrenotazione.stanze.includes("cameretta2")) { %>
+                                                                                <tr>
+                                                                                    <td>Cameretta 2</td>
+                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
+                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
+                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                                        <td class="text-right">€
+                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                <%=costoBase%>€ +
+                                                                                                    <%=costoImballaggio%>€ +
+                                                                                                        <%=costoSmontaggio%>€)
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <%}%>
+                                                                                    <% if (DatiPrenotazione.stanze.includes("bagno")) { %>
+                                                                                        <tr>
+                                                                                            <td>Bagno</td>
+                                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.bagno;
+                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno;
+                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno;%>
+                                                                                                <td class="text-right">€
+                                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                        <%=costoBase%>€ +
+                                                                                                            <%=costoImballaggio%>€ +
+                                                                                                                <%=costoSmontaggio%>€)
+                                                                                                </td>
+                                                                                        </tr>
+                                                                                        <%}%>
+                                                                                            <% if (DatiPrenotazione.stanze.includes("bagno2")) { %>
+                                                                                                <tr>
+                                                                                                    <td>Bagno 2</td>
+                                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.bagno;
+                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno;
+                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno;%>
+                                                                                                        <td class="text-right">€
+                                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                <%=costoBase%>€ +
+                                                                                                                    <%=costoImballaggio%>€ +
+                                                                                                                        <%=costoSmontaggio%>€)
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                <%}%>
+                                                                                                    <% if (DatiPrenotazione.stanze.includes("ingresso")) { %>
+                                                                                                        <tr>
+                                                                                                            <td>Ingresso</td>
+                                                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.ingresso;
+                                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.ingresso;
+                                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ingresso;%>
+                                                                                                                <td class="text-right">€
+                                                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                        <%=costoBase%>€
+                                                                                                                            +
+                                                                                                                            <%=costoImballaggio%>€
+                                                                                                                                +
+                                                                                                                                <%=costoSmontaggio%>€)
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                        <%}%>
+                                                                                                            <% if (DatiPrenotazione.stanze.includes("studio")) { %>
+                                                                                                                <tr>
+                                                                                                                    <td>Studio</td>
+                                                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.studio;
+                                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.studio;
+                                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.studio;%>
+                                                                                                                        <td class="text-right">€
+                                                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                <%=costoBase%>€
+                                                                                                                                    +
+                                                                                                                                    <%=costoImballaggio%>€
+                                                                                                                                        +
+                                                                                                                                        <%=costoSmontaggio%>€)
+                                                                                                                        </td>
+                                                                                                                </tr>
+                                                                                                                <%}%>
+                                                                                                                    <% if (DatiPrenotazione.stanze.includes("balcone")) { %>
+                                                                                                                        <tr>
+                                                                                                                            <td>Balcone</td>
+                                                                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.balcone;
+                                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.balcone;
+                                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.balcone;%>
+                                                                                                                                <td class="text-right">€
+                                                                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                        <%=costoBase%>€
+                                                                                                                                            +
+                                                                                                                                            <%=costoImballaggio%>€
+                                                                                                                                                +
+                                                                                                                                                <%=costoSmontaggio%>€)
+                                                                                                                                </td>
+                                                                                                                        </tr>
+                                                                                                                        <%}%>
+                                                                                                                            <% if (DatiPrenotazione.stanze.includes("soffitta")) { %>
+                                                                                                                                <tr>
+                                                                                                                                    <td>Soffitta</td>
+                                                                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.soffitta;
+                                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.soffitta;
+                                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.soffitta;%>
+                                                                                                                                        <td class="text-right">€
+                                                                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                                <%=costoBase%>€
+                                                                                                                                                    +
+                                                                                                                                                    <%=costoImballaggio%>€
+                                                                                                                                                        +
+                                                                                                                                                        <%=costoSmontaggio%>€)
+                                                                                                                                        </td>
+                                                                                                                                </tr>
+                                                                                                                                <%}%>
+                                                                                                                                    <% if (DatiPrenotazione.stanze.includes("giardino")) { %>
+                                                                                                                                        <tr>
+                                                                                                                                            <td>Giardino</td>
+                                                                                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.giardino;
+                                                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.giardino;
+                                                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.giardino;%>
+                                                                                                                                                <td class="text-right">€
+                                                                                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                                        <%=costoBase%>€
+                                                                                                                                                            +
+                                                                                                                                                            <%=costoImballaggio%>€
+                                                                                                                                                                +
+                                                                                                                                                                <%=costoSmontaggio%>€)
+                                                                                                                                                </td>
+                                                                                                                                        </tr>
+                                                                                                                                        <%}%>
+                                                                                                                                            <% if (DatiPrenotazione.stanze.includes("boxGarage")) { %>
+                                                                                                                                                <tr>
+                                                                                                                                                    <td>Box/Garage</td>
+                                                                                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.boxGarage;
+                                                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.boxGarage;
+                                                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.boxGarage;%>
+                                                                                                                                                        <td class="text-right">€
+                                                                                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                                                <%=costoBase%>€
+                                                                                                                                                                    +
+                                                                                                                                                                    <%=costoImballaggio%>€
+                                                                                                                                                                        +
+                                                                                                                                                                        <%=costoSmontaggio%>€)
+                                                                                                                                                        </td>
+                                                                                                                                                </tr>
+                                                                                                                                                <%}%>
+                                                                                                                                                    <% if (DatiPrenotazione.stanze.includes("ripostiglio")) { %>
+                                                                                                                                                        <tr>
+                                                                                                                                                            <td>Ripostiglio</td>
+                                                                                                                                                            <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.ripostiglio;
+                                                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.ripostiglio;
+                                                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ripostiglio;%>
+                                                                                                                                                                <td class="text-right">€
+                                                                                                                                                                    <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                                                        <%=costoBase%>€
+                                                                                                                                                                            +
+                                                                                                                                                                            <%=costoImballaggio%>€
+                                                                                                                                                                                +
+                                                                                                                                                                                <%=costoSmontaggio%>€)
+                                                                                                                                                                </td>
+                                                                                                                                                        </tr>
+                                                                                                                                                        <%}%>
+                                                                                                                                                            <% if (DatiPrenotazione.stanze.includes("cantina")) { %>
+                                                                                                                                                                <tr>
+                                                                                                                                                                    <td>cantina</td>
+                                                                                                                                                                    <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.cantina;
+                                                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.cantina;
+                                                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cantina;%>
+                                                                                                                                                                        <td class="text-right">€
+                                                                                                                                                                            <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
+                                                                                                                                                                                <%=costoBase%>€
+                                                                                                                                                                                    +
+                                                                                                                                                                                    <%=costoImballaggio%>€
+                                                                                                                                                                                        +
+                                                                                                                                                                                        <%=costoSmontaggio%>€)
+                                                                                                                                                                        </td>
+                                                                                                                                                                </tr>
+                                                                                                                                                                <%}%>
                 </tbody>
             </table>
 
@@ -248,15 +463,15 @@
                 <tbody>
                     <tr>
                         <td>Imballaggio</td>
-                        <td>sì/no</td>
+                        <td><%if (DatiPrenotazione.imballaggio==="true") {%>SI<%}else{%>NO<%}%></td>
                     </tr>
                     <tr>
                         <td>Smontaggio/Rimontaggio</td>
-                        <td>sì/no</td>
+                        <td><%if (DatiPrenotazione.smontaggioRiassemblaggio==="true") {%>SI<%}else{%>NO<%}%></td>
                     </tr>
                     <tr>
                         <td>Deposito Merci </td>
-                        <td>sì/no</td>
+                        <td><%if (DatiPrenotazione.depositoMerci==="true") {%>SI<%}else{%>NO<%}%></td>
                     </tr>
 
                 </tbody>
@@ -266,9 +481,9 @@
         </div>
 
         <div class="row">
-            <div class="col p-5">
-                <h5>Costo totale:
-                    <%=costoTotale%> €
+            <div class="col p-5 text-right">
+                <h5>Costo totale:<h1><%=costoTotale%> €</h1>
+                    
                 </h5>
                 <p>Il costo è comprensivo delle maggiorazioni dovute alla difficoltà del trasloco e delle distanze. </p>
             </div>
