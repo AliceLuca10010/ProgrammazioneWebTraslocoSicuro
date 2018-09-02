@@ -4,10 +4,8 @@ var cookieSession = require('cookie-session');
 var bodyParser = require("body-parser");
 const server = express(); //chiamata al server
 const porta = 2000; //la porta
-const path = require('path');
 const listaTraslocatori = require("./models/traslocatore.js").traslocatori;
-const controllersTraslocatori = require("./controllers/traslocatore.js");
-const controlloTraslocatoriInizialiDelDatabase = controllersTraslocatori.controlloTraslocatoriInizialiDatabase;
+const controllerTraslocatori = require("./controllers/traslocatore.js");
 const modelloPrenotazione = require("./models/prenotazione.js");
 var controllersUser = require("./controllers/user.js");
 const modelloUtenti = require('./models/user');
@@ -32,7 +30,7 @@ var indirizziTraslocatori = [];
 var indirizzoPartenzaUtente = [];
 var indirizzoArrivoUtente = [];
 
-controlloTraslocatoriInizialiDelDatabase(listaTraslocatori);
+controllerTraslocatori.controlloTraslocatoriInizialiDatabase(listaTraslocatori);
 
 const googleMapsController = require('./controllers/googleMaps');
 var bcrypt = require('bcrypt');
