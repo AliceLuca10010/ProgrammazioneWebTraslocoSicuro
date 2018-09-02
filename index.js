@@ -223,11 +223,7 @@ server.get("/modificaInfo", checkAuthentication, async function (req, res) {
     var utente = await modelloUtenti.findOne({ email: req.session.utente.email, });
 
     globalUser = utente;
-
-    console.log(req.session.utente.email);
-
     //var utente = globalUser;
-    console.log(utente.nome);
     res.render('modificaInformazioni', {
 
         datiUtenteNome: utente.nome,
@@ -246,9 +242,6 @@ server.get("/modificaInfo", checkAuthentication, async function (req, res) {
 server.post("/modificaInformazioni/Locale", checkAuthentication, async function (req, res) {
 
     utente = globalUser;
-    console.log(globalUser);
-
-
 
     if (req.body.nuovaEmail !== "" && req.body.confermaNuovaEmail !== "") {
         if (req.body.nuovaEmail === req.body.confermaNuovaEmail) {
@@ -439,8 +432,6 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
             //distance text è il corrispettivo (string) in km
             //traslocatore è il traslocatore più vicino (perchè mi trovo ancora dentro a getTraslocatorePiuVicino)
             costoTotale = controllerPrenotazione.calcolaPrezzo(traslocatore, distanceValue, req.session.prenotazione);
-            console.log(costoTotale);
-
             preventivoConfermato = false;
 
             /*newPrenotazione.save(function (err) {
@@ -450,7 +441,6 @@ server.post("/prenotazione/locale", checkAuthentication, async function (req, re
             req.session.prenotazione.costoTotale = costoTotale;
             req.session.prenotazione.traslocatore = traslocatore;
 
-            console.log("req.session.prenotazione = ", req.session.prenotazione);
             var DatiPrenotazione = req.session.prenotazione;
 
             res.render('iMieiAppuntamenti', { costoTotale, preventivoConfermato, DatiPrenotazione });
@@ -492,9 +482,6 @@ server.post('/confermaPreventivo', async function (req, res) {
             costoTotale: req.session.prenotazione.costoTotale,
             traslocatore: req.session.prenotazione.traslocatore
         });
-
-        console.log(newPrenotazione);
-
         req.session.prenotazione = newPrenotazione;
 
         newPrenotazione.save(function (err) {
@@ -577,7 +564,6 @@ server.post('/registrati/locale', checkNotAuthentication, async function (req, r
         if (error) {
             return console.log(error);
         }
-        console.log('Message sent to: %s', User.email);
     });
 
     newUser.save(function (err) {
@@ -586,8 +572,6 @@ server.post('/registrati/locale', checkNotAuthentication, async function (req, r
 
     session = req.session;
     session.utente = newUser;
-    console.log('registrazione completata');
-    console.log('session dopo registrazione = ', req.session.utente.email);
     loggato = true;
     res.redirect('/prenotazione');
 
@@ -597,20 +581,14 @@ server.post('/registrati/locale', checkNotAuthentication, async function (req, r
 server.get('/logout', checkAuthentication, function (req, res, next) {
     if (req.session && req.session.utente) {
         // delete session objecT
-        console.log("sessione eliminata = " + req.session.utente.email);
         req.session = null;
         session = null;
         loggato = false;
-        console.log('session = ', session);
-        console.log('req.session = ', req.session);
-        console.log('loggato = ', loggato);
         indirizzoUtente = [];
         res.render('home', {
             loggato
         });
     }
-
-    console.log("Logout effettuato");
     return;
 });
 
@@ -636,7 +614,6 @@ server.post('/login/locale', checkNotAuthentication, async function (req, res) {
         }
 
         if (!user) {
-            console.log("err2");
             res.render('login', {
                 messaggioErrore: "combinazione email e password errata",
                 bootstrapClasses: "text-left alert alert-danger"
@@ -652,16 +629,10 @@ server.post('/login/locale', checkNotAuthentication, async function (req, res) {
                     messaggioErrore: "combinazione email e password errata",
                     bootstrapClasses: "text-left alert alert-danger"
                 });
-                console.log("password errata") //password errata
-
             } else {
                 session.utente = user;
-                console.log('session dopo login = ', session);
                 loggato = true;
                 globalUser = req.session.utente;
-                console.log('login effettuato');
-                console.log(globalUser + "  GLOBALUSER");
-                console.log(globalUser.email + "   GLOBALUSER PUNTO EMAIL");
                 // await controllersPrenotazione.calcolaPrezzo(globalUser.email );
                 res.render('home', { loggato });
             }
@@ -696,6 +667,9 @@ function checkNotAuthentication(req, res, next) {
     }
 }
 
-
+server.post('/cancellaPrenotazione', async function (req, res) {
+    await modelloPrenotazione.findOneAndRemove({emailUtente : req.session.utente.email});
+    res.redirect('/');
+});
 
 module.exports = globalUser;

@@ -175,8 +175,8 @@
                         <tr>
                             <td>Cucina</td>
                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.cucina;
-                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.cucina;
-                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cucina;%>
+                        var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.cucina : 0;
+                        var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cucina : 0;%>
                                 <td class="text-right">€
                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                         <%=costoBase%>€ +
@@ -189,8 +189,8 @@
                                 <tr>
                                     <td>Salone</td>
                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salone;
-                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salone;
-                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone;%>
+                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.salone : 0;
+                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone : 0;%>
                                         <td class="text-right">€
                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                 <%=costoBase%>€ +
@@ -203,8 +203,8 @@
                                         <tr>
                                             <td>Salone 2</td>
                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salone;
-                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salone;
-                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone;%>
+                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.salone : 0;
+                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salone : 0;%>
                                                 <td class="text-right">€
                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                         <%=costoBase%>€ +
@@ -217,8 +217,8 @@
                                                 <tr>
                                                     <td>Sala Da Pranzo</td>
                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.salaDaPranzo;
-                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.salaDaPranzo;
-                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salaDaPranzo;%>
+                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.salaDaPranzo : 0;
+                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.salaDaPranzo : 0;%>
                                                         <td class="text-right">€
                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                 <%=costoBase%>€ +
@@ -231,8 +231,8 @@
                                                         <tr>
                                                             <td>Camera</td>
                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
-                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
-                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.camera : 0;
+                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera : 0;%>
                                                                 <td class="text-right">€
                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                         <%=costoBase%>€ +
@@ -245,8 +245,8 @@
                                                                 <tr>
                                                                     <td>Camera 2</td>
                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
-                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
-                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.camera : 0;
+                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera : 0;%>
                                                                         <td class="text-right">€
                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                 <%=costoBase%>€ +
@@ -259,8 +259,8 @@
                                                                         <tr>
                                                                             <td>Cameretta</td>
                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
-                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
-                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.camera : 0;
+                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera : 0;%>
                                                                                 <td class="text-right">€
                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                         <%=costoBase%>€ +
@@ -273,8 +273,8 @@
                                                                                 <tr>
                                                                                     <td>Cameretta 2</td>
                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.camera;
-                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.camera;
-                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera;%>
+                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.camera : 0;
+                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.camera : 0;%>
                                                                                         <td class="text-right">€
                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                 <%=costoBase%>€ +
@@ -287,8 +287,8 @@
                                                                                         <tr>
                                                                                             <td>Bagno</td>
                                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.bagno;
-                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno;
-                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno;%>
+                                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno : 0;
+                                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno : 0;%>
                                                                                                 <td class="text-right">€
                                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                         <%=costoBase%>€ +
@@ -301,8 +301,8 @@
                                                                                                 <tr>
                                                                                                     <td>Bagno 2</td>
                                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.bagno;
-                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno;
-                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno;%>
+                                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.bagno : 0;
+                                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.bagno : 0;%>
                                                                                                         <td class="text-right">€
                                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                 <%=costoBase%>€ +
@@ -315,8 +315,8 @@
                                                                                                         <tr>
                                                                                                             <td>Ingresso</td>
                                                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.ingresso;
-                                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.ingresso;
-                                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ingresso;%>
+                                                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.ingresso : 0;
+                                                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ingresso : 0;%>
                                                                                                                 <td class="text-right">€
                                                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                         <%=costoBase%>€
@@ -331,8 +331,8 @@
                                                                                                                 <tr>
                                                                                                                     <td>Studio</td>
                                                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.studio;
-                                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.studio;
-                                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.studio;%>
+                                                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.studio : 0;
+                                                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.studio : 0;%>
                                                                                                                         <td class="text-right">€
                                                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                 <%=costoBase%>€
@@ -347,8 +347,8 @@
                                                                                                                         <tr>
                                                                                                                             <td>Balcone</td>
                                                                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.balcone;
-                                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.balcone;
-                                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.balcone;%>
+                                                                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.balcone : 0;
+                                                                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.balcone : 0;%>
                                                                                                                                 <td class="text-right">€
                                                                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                         <%=costoBase%>€
@@ -363,8 +363,8 @@
                                                                                                                                 <tr>
                                                                                                                                     <td>Soffitta</td>
                                                                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.soffitta;
-                                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.soffitta;
-                                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.soffitta;%>
+                                                                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.soffitta : 0;
+                                                                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.soffitta : 0;%>
                                                                                                                                         <td class="text-right">€
                                                                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                                 <%=costoBase%>€
@@ -379,8 +379,8 @@
                                                                                                                                         <tr>
                                                                                                                                             <td>Giardino</td>
                                                                                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.giardino;
-                                                                                var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.giardino;
-                                                                                var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.giardino;%>
+                                                                                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.giardino : 0;
+                                                                                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.giardino : 0;%>
                                                                                                                                                 <td class="text-right">€
                                                                                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                                         <%=costoBase%>€
@@ -395,8 +395,8 @@
                                                                                                                                                 <tr>
                                                                                                                                                     <td>Box/Garage</td>
                                                                                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.boxGarage;
-                                                                                    var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.boxGarage;
-                                                                                    var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.boxGarage;%>
+                                                                                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.boxGarage : 0;
+                                                                                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.boxGarage : 0;%>
                                                                                                                                                         <td class="text-right">€
                                                                                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                                                 <%=costoBase%>€
@@ -411,8 +411,8 @@
                                                                                                                                                         <tr>
                                                                                                                                                             <td>Ripostiglio</td>
                                                                                                                                                             <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.ripostiglio;
-                                                                                        var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.ripostiglio;
-                                                                                        var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ripostiglio;%>
+                                                                                                                                                            var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.ripostiglio : 0;
+                                                                                                                                                            var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.ripostiglio : 0;%>
                                                                                                                                                                 <td class="text-right">€
                                                                                                                                                                     <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                                                         <%=costoBase%>€
@@ -427,8 +427,8 @@
                                                                                                                                                                 <tr>
                                                                                                                                                                     <td>cantina</td>
                                                                                                                                                                     <% var costoBase = DatiPrenotazione.traslocatore.costiBaseStanze.cantina;
-                                                                                            var costoImballaggio = DatiPrenotazione.traslocatore.costiImballaggioStanze.cantina;
-                                                                                            var costoSmontaggio = DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cantina;%>
+                                                                                                                                                                    var costoImballaggio = DatiPrenotazione.imballaggio==="true" ? DatiPrenotazione.traslocatore.costiImballaggioStanze.cantina : 0;
+                                                                                                                                                                    var costoSmontaggio = DatiPrenotazione.smontaggioRiassemblaggio==="true" ? DatiPrenotazione.traslocatore.costiSmontaggioRiassemblaggioStanze.cantina : 0;%>
                                                                                                                                                                         <td class="text-right">€
                                                                                                                                                                             <%=(costoBase+costoImballaggio+costoSmontaggio)%> (
                                                                                                                                                                                 <%=costoBase%>€
@@ -463,15 +463,27 @@
                 <tbody>
                     <tr>
                         <td>Imballaggio</td>
-                        <td><%if (DatiPrenotazione.imballaggio==="true") {%>SI<%}else{%>NO<%}%></td>
+                        <td>
+                            <%if (DatiPrenotazione.imballaggio==="true") {%>SI
+                                <%}else{%>NO
+                                    <%}%>
+                        </td>
                     </tr>
                     <tr>
                         <td>Smontaggio/Rimontaggio</td>
-                        <td><%if (DatiPrenotazione.smontaggioRiassemblaggio==="true") {%>SI<%}else{%>NO<%}%></td>
+                        <td>
+                            <%if (DatiPrenotazione.smontaggioRiassemblaggio==="true") {%>SI
+                                <%}else{%>NO
+                                    <%}%>
+                        </td>
                     </tr>
                     <tr>
                         <td>Deposito Merci </td>
-                        <td><%if (DatiPrenotazione.depositoMerci==="true") {%>SI<%}else{%>NO<%}%></td>
+                        <td>
+                            <%if (DatiPrenotazione.depositoMerci==="true") {%>SI
+                                <%}else{%>NO
+                                    <%}%>
+                        </td>
                     </tr>
 
                 </tbody>
@@ -481,9 +493,17 @@
         </div>
 
         <div class="row">
-            <div class="col p-5 text-right">
-                <h5>Costo totale:<h1><%=costoTotale%> €</h1>
-                    
+            <div class="col-6 p-5 text-left">
+                <form action="/cancellaPrenotazione" method="POST">
+                    <button class="btn btn-danger"><%if(!preventivoConfermato){%>Annulla<%}else{%>Cancella Prenotazione<%}%></button>
+                </form>
+            </div>
+            <div class="col-6 p-5 text-right">
+                <h5>Costo totale:
+                    <h1>
+                        <%=costoTotale%> €
+                    </h1>
+
                 </h5>
                 <p>Il costo è comprensivo delle maggiorazioni dovute alla difficoltà del trasloco e delle distanze. </p>
             </div>

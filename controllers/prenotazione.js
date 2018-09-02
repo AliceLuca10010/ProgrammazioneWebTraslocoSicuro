@@ -20,8 +20,6 @@ module.exports = {
             costoDistanza = traslocatore.costoDistanza.minore400km;
             //minore 400
         }
-        console.log(costoDistanza + "costoDistanza");
-
         var costoDifficolta;
 
         //calcolo il costo della difficoltà in base alla posizione dell'abitazione. il costo sarà diverso se l'abitazione
@@ -64,9 +62,6 @@ module.exports = {
 
             }
         }
-
-        console.log(costoDifficolta + "costoDifficoltà");
-
         var costoDeposito;
         //calcolo il costo del depositoMerci se questo servizio viene scelto. Il costo dipende dal numero di stanze.
 
@@ -77,10 +72,6 @@ module.exports = {
         else { //se il deposito merci non è stato scelto come servizio
             costoDeposito = 0;
         }
-
-        console.log(costoDeposito + "costoDeposito");
-
-
         //in base alle stanze scelte sommo i costi del traslocatore al costoBase
 
         var costoBase = 0;
@@ -145,11 +136,6 @@ module.exports = {
 
             }
         }
-
-
-        console.log(costoBase + "costoBase");
-
-
         //in base alle stanze scelte sommo i costi del traslocatore al costoImballaggio
         var costoImballaggio = 0;
 
@@ -215,10 +201,6 @@ module.exports = {
                 }
             }
         }
-
-        console.log(costoImballaggio + "costoImballaggio");
-
-
         //in base alle stanze scelte sommo i costi del traslocatore al costoSmontaggioRiassemblaggio
         var costoSmontaggioRiassemblaggio = 0;
 
@@ -303,14 +285,7 @@ module.exports = {
                 }
             }
         }
-
-        console.log(costoSmontaggioRiassemblaggio + "costoSmontaggioRiassemblaggio");
-
         var costoTotale = costoBase + costoImballaggio + costoSmontaggioRiassemblaggio + costoDeposito + costoDifficolta + costoDistanza;
-
-
-        console.log("il costo totale è " + costoTotale);
-
         return costoTotale;
     },
 

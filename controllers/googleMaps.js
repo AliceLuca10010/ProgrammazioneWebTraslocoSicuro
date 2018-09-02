@@ -144,7 +144,7 @@ function getDistance(origins, destinations, callback) {
             //alla fine dei for ho il valore della distanza minimo e quindi la destinazione più vicina
             callback(distanceValue, distanceText);
         } else {
-            console.log("ERRORE");
+            console.log("ERRORE GOOGLE MAPS");
         }
     });
 }
