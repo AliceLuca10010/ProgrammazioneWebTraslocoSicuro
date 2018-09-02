@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
-var express = require("express");
-var passport = require("passport");
-var passportLocalMongoose = require('passport-local-mongoose');
-var user = express();
-
-
-
-
 
 var utentiSchema = new Schema({
     nome: { type: String, max: 100, required: true },
@@ -36,4 +28,4 @@ utentiSchema.pre('save', function(next) {
 var modelloUtenti = mongoose.model('utenti', utentiSchema, 'utenti');
 
 
-module.exports = { modelloUtenti, utentiSchema };
+module.exports = modelloUtenti;

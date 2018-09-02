@@ -1,6 +1,5 @@
-const modelUser = require('../models/user');
-const utentiSchema = modelUser.utentiSchema;
-const modelloUtenti = modelUser.modelloUtenti;
+
+const modelloUtenti = require('../models/user');
 
 module.exports = {
     controlloData: (data) => {

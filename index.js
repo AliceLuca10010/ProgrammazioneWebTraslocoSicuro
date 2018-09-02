@@ -5,16 +5,12 @@ var bodyParser = require("body-parser");
 const server = express(); //chiamata al server
 const porta = 2000; //la porta
 const path = require('path');
-const modelsTraslocatori = require("./models/traslocatore.js");
-const listaTraslocatori = modelsTraslocatori.traslocatori;
+const listaTraslocatori = require("./models/traslocatore.js").traslocatori;
 const controllersTraslocatori = require("./controllers/traslocatore.js");
 const controlloTraslocatoriInizialiDelDatabase = controllersTraslocatori.controlloTraslocatoriInizialiDatabase;
-const modelsPrenotazione = require("./models/prenotazione.js");
-const modelloPrenotazione = modelsPrenotazione.modelloPrenotazione;
+const modelloPrenotazione = require("./models/prenotazione.js");
 var controllersUser = require("./controllers/user.js");
-const modelsUser = require('./models/user');
-const modelloUtenti = modelsUser.modelloUtenti;
-const utentiSchema = modelsUser.utentiSchema;
+const modelloUtenti = require('./models/user');
 const dotenv = require('dotenv').config();
 const postino = require('./controllers/postino');
 var MongoStore = require('connect-mongo')(session);
@@ -639,8 +635,6 @@ server.post('/login/locale', checkNotAuthentication, async function (req, res) {
         })
     });
 });
-
-var Utente = mongoose.model('Utente', utentiSchema);
 
 async function inizializzaDestinazioni() {
     var traslocatori = await modelloTraslocatori.find({});

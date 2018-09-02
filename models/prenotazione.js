@@ -33,4 +33,4 @@ var prenotazioneSchema = new Schema({
 var modelloPrenotazione = mongoose.model('prenotazione', prenotazioneSchema, 'prenotazione');
 
 
-module.exports = { modelloPrenotazione, prenotazioneSchema };
+module.exports = modelloPrenotazione;

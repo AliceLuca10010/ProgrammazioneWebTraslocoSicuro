@@ -1,4 +1,4 @@
-const ModelloPrenotazione = require('../models/prenotazione').modelloPrenotazione;
+const ModelloPrenotazione = require('../models/prenotazione');
 
 module.exports = {
     calcolaPrezzo: function (traslocatore, distanceValue, DatiPrenotazione) {
