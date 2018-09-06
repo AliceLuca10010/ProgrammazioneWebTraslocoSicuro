@@ -84,7 +84,18 @@ module.exports = {
                     costoBase += traslocatore.costiBaseStanze.cucina;
                     break;
 
+                case "cameretta":
+                    costoBase += traslocatore.costiBaseStanze.camera;
+                    break;
+                case "cameretta2":
+                    costoBase += traslocatore.costiBaseStanze.camera;
+                    break;
+
                 case "salone":
+                    costoBase += traslocatore.costiBaseStanze.salone;
+
+                    break;
+                case "salone2":
                     costoBase += traslocatore.costiBaseStanze.salone;
 
                     break;
@@ -96,8 +107,14 @@ module.exports = {
                 case "camera":
                     costoBase += traslocatore.costiBaseStanze.camera;
                     break;
+                case "camera2":
+                    costoBase += traslocatore.costiBaseStanze.camera;
+                    break;
 
                 case "bagno":
+                    costoBase += traslocatore.costiBaseStanze.bagno;
+                    break;
+                case "bagno2":
                     costoBase += traslocatore.costiBaseStanze.bagno;
                     break;
 
@@ -148,7 +165,18 @@ module.exports = {
                         costoImballaggio += traslocatore.costiImballaggioStanze.cucina;
                         break;
 
+                    case "cameretta":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.camera;
+                        break;
+                    case "cameretta2":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.camera;
+                        break;
+
                     case "salone":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.salone;
+
+                        break;
+                    case "salone2":
                         costoImballaggio += traslocatore.costiImballaggioStanze.salone;
 
                         break;
@@ -160,8 +188,14 @@ module.exports = {
                     case "camera":
                         costoImballaggio += traslocatore.costiImballaggioStanze.camera;
                         break;
+                    case "camera2":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.camera;
+                        break;
 
                     case "bagno":
+                        costoImballaggio += traslocatore.costiImballaggioStanze.bagno;
+                        break;
+                    case "bagno2":
                         costoImballaggio += traslocatore.costiImballaggioStanze.bagno;
                         break;
 
@@ -215,8 +249,8 @@ module.exports = {
 
                     case "salone":
                         costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.salone;
-                         break;
-                         
+                        break;
+
                     case "salone2":
                         costoSmontaggioRiassemblaggio += traslocatore.costiSmontaggioRiassemblaggioStanze.salone;
                         break;
@@ -289,15 +323,15 @@ module.exports = {
         return costoTotale;
     },
 
-    controllaPrenotazioneGiaRegistrata:  async function (prenotazione) {
+    controllaPrenotazioneGiaRegistrata: async function (prenotazione) {
         const prenotazioneTrovata = await ModelloPrenotazione.findOne({
-            emailUtente : prenotazione.emailUtente
+            emailUtente: prenotazione.emailUtente
         });
-    
+
         if (prenotazioneTrovata) {
             return true;
         } else {
-    
+
             return false;
         }
     }
